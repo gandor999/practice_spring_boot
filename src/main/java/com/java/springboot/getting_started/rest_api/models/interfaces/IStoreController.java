@@ -1,5 +1,7 @@
 package com.java.springboot.getting_started.rest_api.models.interfaces;
 
+import java.util.UUID;
+
 import com.java.springboot.getting_started.rest_api.models.data_objects.DataObjects.StoreProduct;
 
 public interface IStoreController {
@@ -9,7 +11,11 @@ public interface IStoreController {
 
     public StoreProduct getStoreProduct(String productName);
 
-    public StoreProduct getStoreProduct(long productId);
+    public StoreProduct getStoreProduct(UUID productId);
 
     public StoreProduct addProduct(StoreProduct storeProduct);
+
+    public StoreProduct updateStoreProduct(UUID productId, StoreProduct storeProduct);
+
+    public StoreProduct removeStoreProduct(UUID productId);
 }

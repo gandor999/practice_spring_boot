@@ -1,13 +1,15 @@
 package com.java.springboot.getting_started.rest_api.controllers;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.HttpClientErrorException;
 
 import com.java.springboot.getting_started.rest_api.models.data_objects.DataObjects.StoreProduct;
 import com.java.springboot.getting_started.rest_api.models.interfaces.IStoreController;
@@ -18,17 +20,6 @@ public class MainController implements IStoreController {
 
     @Autowired
     StoreService storeService;
-
-    @GetMapping("/sample_internal_error")
-    public void sampleInternalError() throws Exception {
-        throw new Exception(
-                "normal custom exception, example: something happened during runtime in server | this is a pretty generalized error");
-    }
-
-    @GetMapping("/sample_http_error")
-    public void sampleHttpError() throws HttpClientErrorException {
-        throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "custom exception");
-    }
 
     @GetMapping("/store_service")
     @Override
@@ -50,7 +41,7 @@ public class MainController implements IStoreController {
 
     @GetMapping("/store_service/id")
     @Override
-    public StoreProduct getStoreProduct(@RequestParam(value = "product_id") long productId) {
+    public StoreProduct getStoreProduct(@RequestParam(value = "product_id") UUID productId) {
         return storeService.getStoreProduct(productId);
     }
 
@@ -58,5 +49,18 @@ public class MainController implements IStoreController {
     @Override
     public StoreProduct addProduct(@RequestBody StoreProduct storeProduct) {
         return storeService.addProduct(storeProduct);
+    }
+
+    @PutMapping("/store_service/id")
+    @Override
+    public StoreProduct updateStoreProduct(@RequestParam(value = "product_id") UUID productId,
+            StoreProduct storeProduct) {
+        return storeService.updateStoreProduct(productId, storeProduct);
+    }
+
+    @DeleteMapping("/store_service/id")
+    @Override
+    public StoreProduct removeStoreProduct(@RequestParam(value = "product_id") UUID productId) {
+        return storeService.removeStoreProduct(productId);
     }
 }

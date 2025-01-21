@@ -1,5 +1,7 @@
 package com.java.springboot.getting_started.rest_api.services;
 
+import java.util.UUID;
+
 import org.springframework.stereotype.Service;
 
 import com.java.springboot.getting_started.rest_api.models.data_objects.DataObjects.StoreProduct;
@@ -10,8 +12,7 @@ public class StoreService implements IStoreService {
 
     @Override
     public String getStoreLanding() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getStoreLanding'");
+        return "Hello World";
     }
 
     @Override
@@ -27,7 +28,7 @@ public class StoreService implements IStoreService {
     }
 
     @Override
-    public StoreProduct getStoreProduct(long productId) {
+    public StoreProduct getStoreProduct(UUID productId) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getStoreProduct'");
     }
@@ -36,5 +37,17 @@ public class StoreService implements IStoreService {
     public StoreProduct addProduct(StoreProduct storeProduct) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'addProduct'");
+    }
+
+    @Override
+    public StoreProduct updateStoreProduct(UUID productId, StoreProduct storeProduct) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updaStoreProduct'");
+    }
+
+    @Override
+    public StoreProduct removeStoreProduct(UUID productId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'removStoreProduct'");
     }
 }
