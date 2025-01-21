@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,9 +40,8 @@ public class MainController implements IStoreController {
     @GetMapping("/store_service/product")
     @Override
     public StoreProduct getStoreProduct(
-        @RequestParam(value = "product_name", required = false) String productName, 
-        @RequestParam(value = "product_id") UUID productId
-    ) {
+            @RequestParam(value = "product_name", required = false) String productName,
+            @RequestParam(value = "product_id") UUID productId) {
         System.out.println("productName: " + productName);
         System.out.println("productId: " + productId);
 
@@ -56,22 +56,23 @@ public class MainController implements IStoreController {
         return null;
     }
 
-    @PutMapping("/store_service/product")
+    @PatchMapping("/store_service/product")
     @Override
-    public StoreProduct updateStoreProduct(@RequestParam(value = "product_id") UUID productId,
-            StoreProduct storeProduct) {
+    public StoreProduct updateStoreProduct(
+        @RequestParam(value = "product_id") UUID productId,
+        @RequestBody StoreProduct storeProduct) {
         return storeService.updateStoreProduct(productId, storeProduct);
+    }
+
+    @DeleteMapping("/store_service/product")
+    @Override
+    public StoreProduct removeStoreProduct(@RequestParam(value = "product_id") UUID productId) {
+        return storeService.removeStoreProduct(productId);
     }
 
     @PostMapping("/store_service/product")
     @Override
     public StoreProduct addProduct(@RequestBody StoreProduct storeProduct) {
         return storeService.addProduct(storeProduct);
-    }
-
-    @DeleteMapping("/store_service/id")
-    @Override
-    public StoreProduct removeStoreProduct(@RequestParam(value = "product_id") UUID productId) {
-        return storeService.removeStoreProduct(productId);
     }
 }

@@ -30,13 +30,30 @@ public class MockDatabase {
         return newStoreProduct;
     }
 
+    public StoreProduct updateStoreProduct(UUID id, StoreProduct newStoreProduct) {
+        int indexOfProduct = 0;
+
+        for (int i = 0; i < storeProducts.size(); i++) {
+            if (storeProducts.get(i).productId().equals(id)) {
+                indexOfProduct = i;
+                break;
+            }
+        }
+
+        storeProducts.set(indexOfProduct, new StoreProduct(id, newStoreProduct.description(),
+                newStoreProduct.inventoryCount(), newStoreProduct.price(), newStoreProduct.productName()));
+
+        return storeProducts.get(indexOfProduct);
+    }
+
     public StoreProduct removeStoreProduct(UUID productId) {
         StoreProduct removedStoreProduct = null;
 
         for (StoreProduct storeProduct : storeProducts) {
             if (storeProduct.productId().equals(productId)) {
                 storeProducts.remove(storeProduct);
-                break;
+                removedStoreProduct = storeProduct;
+                return removedStoreProduct;
             }
         }
 

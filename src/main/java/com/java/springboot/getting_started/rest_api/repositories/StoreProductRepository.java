@@ -41,14 +41,7 @@ public class StoreProductRepository implements IBaseRepository<StoreProduct> {
 
     @Override
     public StoreProduct updateByUUID(UUID id, StoreProduct t) {
-        StoreProduct[] products = mockDatabase.getStoreProducts();
-        for (int i = 0; i < products.length; i++) {
-            if (products[i].productId().equals(id)) {
-                products[i] = t;
-                return products[i];
-            }
-        }
-        return null;
+        return mockDatabase.updateStoreProduct(id, t);
     }
 
     @Override
