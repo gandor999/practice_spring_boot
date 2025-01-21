@@ -1,5 +1,6 @@
 package com.java.springboot.getting_started.rest_api.exception_handling;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.ErrorResponseException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -12,8 +13,14 @@ import com.java.springboot.getting_started.rest_api.models.exceptions.ExceptionW
 @ControllerAdvice
 public class ExceptionsManager {
     @ExceptionHandler(value = HttpClientErrorException.class)
-    public ErrorResponseException handlerHttpClientErrorException(HttpClientErrorException ex) {
+    public ErrorResponseException handleHttpClientErrorException(HttpClientErrorException ex) {
         return new ExceptionWrapper(ProblemDetail.forStatusAndDetail(ex.getStatusCode(), ex.getMessage()), ex);
+    }
+
+    // handle general exceptions
+    @ExceptionHandler(value = Exception.class)
+    public ErrorResponseException handleNormalExceptions(Exception ex) {
+        return new ExceptionWrapper(ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage()), ex);
     }
 
     @ExceptionHandler(value = NoResourceFoundException.class)
