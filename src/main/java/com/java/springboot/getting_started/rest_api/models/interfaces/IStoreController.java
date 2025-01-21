@@ -9,9 +9,7 @@ public interface IStoreController {
 
     public StoreProduct[] getStoreProducts();
 
-    public StoreProduct getStoreProduct(String productName);
-
-    public StoreProduct getStoreProduct(UUID productId);
+    public StoreProduct getStoreProduct(String productName, UUID productId);
 
     public StoreProduct addProduct(StoreProduct storeProduct);
 

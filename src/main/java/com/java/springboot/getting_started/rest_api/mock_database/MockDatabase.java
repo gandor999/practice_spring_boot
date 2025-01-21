@@ -1,13 +1,15 @@
 package com.java.springboot.getting_started.rest_api.mock_database;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import com.java.springboot.getting_started.rest_api.models.data_objects.DataObjects.StoreProduct;
 
+// @Component
 public class MockDatabase {
-    private List<StoreProduct> storeProducts = null;
-    private static MockDatabase thisInstance = null;
+    private List<StoreProduct> storeProducts = new ArrayList<>();
+    private static final MockDatabase thisInstance = new MockDatabase();;
 
     public MockDatabase() {
         storeProducts.add(new StoreProduct(UUID.randomUUID(), "sample store product", 10, 1000, "Product 1"));
@@ -15,17 +17,11 @@ public class MockDatabase {
     }
 
     public static MockDatabase getInstance() {
-        if (thisInstance != null) {
-            return thisInstance;
-        }
-
-        thisInstance = new MockDatabase();
-
         return thisInstance;
     }
 
     public StoreProduct[] getStoreProducts() {
-        return (StoreProduct[]) storeProducts.toArray();
+        return storeProducts.toArray(new StoreProduct[0]);
     }
 
     public StoreProduct addStoreProduct(StoreProduct newStoreProduct) {
@@ -40,6 +36,7 @@ public class MockDatabase {
         for (StoreProduct storeProduct : storeProducts) {
             if (storeProduct.productId().equals(productId)) {
                 storeProducts.remove(storeProduct);
+                break;
             }
         }
 
