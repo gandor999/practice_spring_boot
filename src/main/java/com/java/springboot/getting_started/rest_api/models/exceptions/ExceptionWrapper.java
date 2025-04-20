@@ -1,20 +1,22 @@
 package com.java.springboot.getting_started.rest_api.models.exceptions;
 
-import java.net.URI;
-
 import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ProblemDetail;
 import org.springframework.web.ErrorResponseException;
 
-import io.micrometer.common.lang.Nullable;
+public class ExceptionWrapper extends BaseException {
+    public ExceptionWrapper(HttpStatusCode status) {
+        super(status);
+    }
 
-public class ExceptionWrapper extends ErrorResponseException {
-    public ExceptionWrapper(ProblemDetail problem, @Nullable Throwable cause) {
-        super(HttpStatusCode.valueOf(problem.getStatus()), problem, cause);
-        if (cause != null) {
-            setType(URI.create(cause.getClass().getName()));
-        } else {
-            setType(URI.create(""));
-        }
+    public ExceptionWrapper(ErrorResponseException ex) {
+        super(ex.getStatusCode());
+        this.getBody().setProperties(ex.getBody().getProperties());
+    }
+
+    // Default exception to be returned
+    public ExceptionWrapper(Exception ex) {
+        super(HttpStatusCode.valueOf(500));
+        this.getBody().setProperty("errorType", ex.getClass().getSimpleName());
+        this.getBody().setProperty("errorMessage", ex.getMessage());
     }
 }

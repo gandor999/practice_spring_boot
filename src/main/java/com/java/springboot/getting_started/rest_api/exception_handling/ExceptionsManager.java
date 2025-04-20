@@ -12,24 +12,13 @@ import com.java.springboot.getting_started.rest_api.models.exceptions.ExceptionW
 
 @ControllerAdvice
 public class ExceptionsManager {
-    @ExceptionHandler(value = HttpClientErrorException.class)
-    public ErrorResponseException handleHttpClientErrorException(HttpClientErrorException ex) {
-        return new ExceptionWrapper(ProblemDetail.forStatusAndDetail(ex.getStatusCode(), ex.getMessage()), ex);
-    }
-
     @ExceptionHandler(value = ErrorResponseException.class)
     public ErrorResponseException handlErrorResponseException(ErrorResponseException ex) {
-        return ex;
+        return new ExceptionWrapper(ex);
     }
 
-    // handle general exceptions
     @ExceptionHandler(value = Exception.class)
-    public ErrorResponseException handleNormalExceptions(Exception ex) {
-        return new ExceptionWrapper(ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage()), ex);
-    }
-
-    @ExceptionHandler(value = NoResourceFoundException.class)
-    public ErrorResponseException handleNoResourceFoundException(NoResourceFoundException ex) {
-        return new ExceptionWrapper(ProblemDetail.forStatusAndDetail(ex.getStatusCode(), ex.getMessage()), ex);
+    public ErrorResponseException handleGeneralExceptions(Exception ex) {
+        return new ExceptionWrapper(ex);
     }
 }

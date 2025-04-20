@@ -2,7 +2,6 @@ package com.java.springboot.getting_started.rest_api.models.exceptions;
 
 import java.net.URI;
 
-import org.springframework.beans.factory.parsing.Problem;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.ErrorResponseException;
