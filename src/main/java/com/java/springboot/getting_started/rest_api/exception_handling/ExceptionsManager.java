@@ -17,6 +17,11 @@ public class ExceptionsManager {
         return new ExceptionWrapper(ProblemDetail.forStatusAndDetail(ex.getStatusCode(), ex.getMessage()), ex);
     }
 
+    @ExceptionHandler(value = ErrorResponseException.class)
+    public ErrorResponseException handlErrorResponseException(ErrorResponseException ex) {
+        return ex;
+    }
+
     // handle general exceptions
     @ExceptionHandler(value = Exception.class)
     public ErrorResponseException handleNormalExceptions(Exception ex) {

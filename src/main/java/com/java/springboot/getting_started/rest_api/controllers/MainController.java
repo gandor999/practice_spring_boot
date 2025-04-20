@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.java.springboot.getting_started.rest_api.models.Test;
 import com.java.springboot.getting_started.rest_api.models.data_objects.DataObjects.StoreProduct;
 import com.java.springboot.getting_started.rest_api.models.interfaces.IStoreController;
+import com.java.springboot.getting_started.rest_api.models.interfaces.request.TestRequest;
 import com.java.springboot.getting_started.rest_api.services.StoreService;
+import com.java.springboot.getting_started.rest_api.validation.Validate;
 
 @RestController
 public class MainController implements IStoreController {
@@ -74,5 +77,16 @@ public class MainController implements IStoreController {
     @Override
     public StoreProduct addProduct(@RequestBody StoreProduct storeProduct) {
         return storeService.addProduct(storeProduct);
+    }
+
+    @GetMapping("/test")
+    public Test getTest() {
+        return new Test();
+    }
+
+    @PostMapping("/test")
+    @Validate
+    public TestRequest addTest(@RequestBody TestRequest test) {
+        return test;
     }
 }
