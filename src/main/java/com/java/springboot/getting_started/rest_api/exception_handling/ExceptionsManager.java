@@ -2,6 +2,7 @@ package com.java.springboot.getting_started.rest_api.exception_handling;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
+import org.springframework.web.ErrorResponse;
 import org.springframework.web.ErrorResponseException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,6 +20,10 @@ public class ExceptionsManager {
 
     @ExceptionHandler(value = Exception.class)
     public ErrorResponseException handleGeneralExceptions(Exception ex) {
+        if (ex instanceof ErrorResponse) {
+            return new ExceptionWrapper((ErrorResponse) ex);
+        }
+
         return new ExceptionWrapper(ex);
     }
 }

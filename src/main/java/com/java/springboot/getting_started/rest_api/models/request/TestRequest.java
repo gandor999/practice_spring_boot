@@ -1,4 +1,4 @@
-package com.java.springboot.getting_started.rest_api.models.interfaces.request;
+package com.java.springboot.getting_started.rest_api.models.request;
 
 import org.springframework.http.HttpStatusCode;
 
@@ -17,7 +17,7 @@ public class TestRequest extends BaseRequest {
     @Override
     public void validate() {
         if (testProp == null || testProp.isEmpty() || testProp.isBlank()) {
-            throw new InvalidInputException(HttpStatusCode.valueOf(400));
+            throw new InvalidInputException(HttpStatusCode.valueOf(400), "testProp should not be empty");
         }
     }
 }

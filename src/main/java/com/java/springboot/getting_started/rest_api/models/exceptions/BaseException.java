@@ -16,4 +16,13 @@ public class BaseException extends ErrorResponseException {
         body.setTitle("");
         body.setType(URI.create(""));
     }
+
+    public BaseException(HttpStatusCode status, String errorMessage) {
+        super(status);
+        ProblemDetail body = this.getBody();
+        body.setDetail("");
+        body.setInstance(URI.create(""));
+        body.setTitle("");
+        body.setType(URI.create(""));
+    }
 }

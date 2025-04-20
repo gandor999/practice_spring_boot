@@ -8,4 +8,10 @@ public class InvalidInputException extends BaseException {
         this.getBody().setProperty("errorType", this.getClass().getSimpleName());
         this.getBody().setProperty("errorMessage", "Invalid Input");
     }
+
+    public InvalidInputException(HttpStatusCode status, String errorMessage) {
+        super(status);
+        this.getBody().setProperty("errorType", this.getClass().getSimpleName());
+        this.getBody().setProperty("errorMessage", errorMessage);
+    }
 }

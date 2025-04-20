@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.java.springboot.getting_started.rest_api.models.Test;
 import com.java.springboot.getting_started.rest_api.models.data_objects.DataObjects.StoreProduct;
 import com.java.springboot.getting_started.rest_api.models.interfaces.IStoreController;
-import com.java.springboot.getting_started.rest_api.models.interfaces.request.TestRequest;
+import com.java.springboot.getting_started.rest_api.models.request.TestRequest;
 import com.java.springboot.getting_started.rest_api.services.StoreService;
 import com.java.springboot.getting_started.rest_api.validation.Validate;
 

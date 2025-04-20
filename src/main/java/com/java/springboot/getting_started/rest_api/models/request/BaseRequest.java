@@ -1,4 +1,4 @@
-package com.java.springboot.getting_started.rest_api.models.interfaces.request;
+package com.java.springboot.getting_started.rest_api.models.request;
 
 import com.java.springboot.getting_started.rest_api.validation.IValidator;
 
